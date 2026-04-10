@@ -1,25 +1,8 @@
-<svg
-  width="16"
-  height="16"
-  viewBox="0 0 16 16"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <g clip-path="url(#woot-logo-clip-2342424e23u32098)">
-    <path
-      d="M8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z"
-      fill="#2781F6"
-    />
-    <path
-      d="M11.4172 11.4172H7.70831C5.66383 11.4172 4 9.75328 4 7.70828C4 5.66394 5.66383 4 7.70835 4C9.75339 4 11.4172 5.66394 11.4172 7.70828V11.4172Z"
-      fill="white"
-      stroke="white"
-      stroke-width="0.1875"
-    />
-  </g>
-  <defs>
-    <clipPath id="woot-logo-clip-2342424e23u32098">
-      <rect width="16" height="16" fill="white" />
-    </clipPath>
-  </defs>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="160" fill="#0C1724"/>
+  <path d="M112 165.333C112 129.981 140.648 101.333 176 101.333H325.333C360.686 101.333 389.333 129.981 389.333 165.333V200C389.333 235.352 360.686 264 325.333 264H272L223.467 332.533V264H176C140.648 264 112 235.352 112 200V165.333Z" fill="#34F2D2"/>
+  <path d="M160 328C160 299.719 182.918 276.8 211.2 276.8H337.067C365.348 276.8 388.267 299.719 388.267 328V350.4C388.267 378.681 365.348 401.6 337.067 401.6H211.2C182.918 401.6 160 378.681 160 350.4V328Z" fill="#12304A"/>
+  <path d="M205.867 337.067H297.6" stroke="#D9FFFA" stroke-width="24" stroke-linecap="round"/>
+  <path d="M205.867 200.533H297.6" stroke="#0C1724" stroke-width="24" stroke-linecap="round"/>
+  <path d="M205.867 368H274.133" stroke="#D9FFFA" stroke-width="24" stroke-linecap="round"/>
 </svg>

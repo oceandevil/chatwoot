@@ -32,9 +32,8 @@ export default {
     CONDENSED: 'condensed',
     EXPANDED: 'expanded',
   },
-  DOCS_URL: 'https://www.chatwoot.com/docs/product/',
-  HELP_CENTER_DOCS_URL:
-    'https://www.chatwoot.com/docs/product/others/help-center',
+  DOCS_URL: 'https://waterwair.com',
+  HELP_CENTER_DOCS_URL: 'https://waterwair.com',
   TESTIMONIAL_URL:
     'https://testimonials.cdn.chatwoot.com/testimonial-content.json',
   WHATSAPP_EMBEDDED_SIGNUP_DOCS_URL:

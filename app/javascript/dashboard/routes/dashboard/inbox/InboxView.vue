@@ -185,13 +185,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="h-full w-full flex-1">
+  <div class="h-full w-full flex-1 p-3">
     <div v-if="showEmptyState" class="flex w-full h-full">
       <InboxEmptyState
         :empty-state-message="$t('INBOX.LIST.NO_MESSAGES_AVAILABLE')"
       />
     </div>
-    <div v-else class="flex flex-col w-full h-full">
+    <div
+      v-else
+      class="flex flex-col w-full h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
+    >
       <InboxItemHeader
         :total-length="totalNotificationCount"
         :current-index="activeNotificationIndex"

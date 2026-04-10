@@ -195,25 +195,38 @@ export default {
 </script>
 
 <template>
-  <section class="flex w-full h-full min-w-0">
-    <ChatList
-      :show-conversation-list="showConversationList"
-      :conversation-inbox="inboxId"
-      :label="label"
-      :team-id="teamId"
-      :conversation-type="conversationType"
-      :folders-id="foldersId"
-      :is-on-expanded-layout="isOnExpandedLayout"
-      @conversation-load="onConversationLoad"
-    />
-    <ConversationBox
-      v-if="showMessageView"
-      :inbox-id="inboxId"
-      :is-on-expanded-layout="isOnExpandedLayout"
+  <section class="flex w-full h-full min-w-0 gap-3 p-3 bg-transparent">
+    <div
+      class="min-w-0 h-full rounded-2xl border border-n-weak bg-n-solid-2/80 overflow-hidden backdrop-blur-sm"
     >
-      <SidepanelSwitch v-if="currentChat.id" />
-    </ConversationBox>
-    <ConversationSidebar v-if="shouldShowSidebar" :current-chat="currentChat" />
+      <ChatList
+        :show-conversation-list="showConversationList"
+        :conversation-inbox="inboxId"
+        :label="label"
+        :team-id="teamId"
+        :conversation-type="conversationType"
+        :folders-id="foldersId"
+        :is-on-expanded-layout="isOnExpandedLayout"
+        @conversation-load="onConversationLoad"
+      />
+    </div>
+    <div
+      v-if="showMessageView"
+      class="flex flex-1 min-w-0 h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
+    >
+      <ConversationBox
+        :inbox-id="inboxId"
+        :is-on-expanded-layout="isOnExpandedLayout"
+      >
+        <SidepanelSwitch v-if="currentChat.id" />
+      </ConversationBox>
+    </div>
+    <div
+      v-if="shouldShowSidebar"
+      class="h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
+    >
+      <ConversationSidebar :current-chat="currentChat" />
+    </div>
     <CmdBarConversationSnooze />
   </section>
 </template>

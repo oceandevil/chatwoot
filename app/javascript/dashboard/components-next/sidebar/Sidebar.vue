@@ -193,6 +193,17 @@ const onComposeClose = () => {
   emitter.emit(BUS_EVENTS.NEW_CONVERSATION_MODAL, false);
 };
 
+const workspaceLabel = computed(() =>
+  isACustomBrandedInstance.value
+    ? 'Client operations workspace'
+    : 'Omnichannel workspace'
+);
+const workspaceProductName = computed(() => 'Waterwair Inbox');
+const workspaceSectionTitle = computed(() => 'Workspace');
+const workspaceSectionDescription = computed(
+  () => 'Routing, queue ownership, and handoff history in one place.'
+);
+
 const newReportRoutes = () => [
   {
     name: 'Reports Agent',
@@ -759,14 +770,22 @@ const menuItems = computed(() => {
           />
         </template>
         <template v-else>
-          <div class="grid flex-shrink-0 place-content-center size-6">
-            <Logo class="size-4" />
+          <div
+            class="grid flex-shrink-0 place-content-center size-9 rounded-xl bg-[linear-gradient(180deg,rgba(52,242,210,0.18),rgba(52,242,210,0.06))] shadow-[inset_0_1px_0_rgba(255,255,255,0.24)]"
+          >
+            <Logo class="size-5" />
           </div>
-          <div class="flex-shrink-0 w-px h-3 bg-n-strong" />
-          <SidebarAccountSwitcher
-            class="flex-grow -mx-1 min-w-0"
-            @show-create-account-modal="emit('showCreateAccountModal')"
-          />
+          <div class="flex min-w-0 flex-1 flex-col gap-0.5">
+            <span
+              class="text-[11px] font-medium uppercase tracking-[0.16em] text-n-slate-10"
+            >
+              {{ workspaceProductName }}
+            </span>
+            <SidebarAccountSwitcher
+              class="flex-grow -mx-1 min-w-0"
+              @show-create-account-modal="emit('showCreateAccountModal')"
+            />
+          </div>
         </template>
       </div>
       <div
@@ -813,6 +832,22 @@ const menuItems = computed(() => {
             />
           </template>
         </ComposeConversation>
+      </div>
+      <div
+        v-if="!isEffectivelyCollapsed"
+        class="mx-2 rounded-2xl border border-n-weak bg-[linear-gradient(180deg,rgba(52,242,210,0.12),rgba(255,255,255,0.02))] px-3 py-3"
+      >
+        <div
+          class="text-[11px] font-medium uppercase tracking-[0.14em] text-n-slate-10"
+        >
+          {{ workspaceSectionTitle }}
+        </div>
+        <div class="mt-1 text-sm font-medium text-n-slate-12">
+          {{ workspaceLabel }}
+        </div>
+        <div class="mt-1 text-xs leading-5 text-n-slate-11">
+          {{ workspaceSectionDescription }}
+        </div>
       </div>
     </section>
     <nav

@@ -162,6 +162,16 @@ Rails.application.routes.draw do
             end
           end
 
+          namespace :workspace do
+            resources :conversations, only: [:index, :show] do
+              member do
+                post :reply
+                patch :handoff
+                patch :closeout
+              end
+            end
+          end
+
           resources :search, only: [:index] do
             collection do
               get :conversations

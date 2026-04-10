@@ -38,6 +38,9 @@ const hasAppliedFiltersOrActiveFolders = computed(() => {
 
 const allCount = computed(() => props.conversationStats?.allCount || 0);
 const formattedAllCount = computed(() => formatNumber(allCount.value));
+const queueSubtitle = computed(
+  () => 'Prioritized handoff queue for live support and follow-up.'
+);
 
 const toggleConversationLayout = () => {
   const { LAYOUT_TYPES } = wootConstants;
@@ -57,33 +60,39 @@ const toggleConversationLayout = () => {
 
 <template>
   <div
-    class="flex items-center justify-between gap-2 px-3 h-[3.25rem]"
+    class="flex items-center justify-between gap-2 px-3 h-[4.25rem] rounded-t-2xl border-b border-n-weak bg-[linear-gradient(180deg,rgba(52,242,210,0.08),rgba(255,255,255,0.02))]"
     :class="{
-      'border-b border-n-strong': hasAppliedFiltersOrActiveFolders,
+      'shadow-[inset_0_-1px_0_rgba(255,255,255,0.04)]':
+        !hasAppliedFiltersOrActiveFolders,
     }"
   >
-    <div class="flex items-center justify-center min-w-0">
-      <h1
-        class="text-base font-medium truncate text-n-slate-12"
-        :title="pageTitle"
-      >
-        {{ pageTitle }}
-      </h1>
-      <span
-        v-if="
-          allCount > 0 && hasAppliedFiltersOrActiveFolders && !isListLoading
-        "
-        class="px-2 py-1 my-0.5 mx-1 rounded-md capitalize bg-n-slate-3 text-xxs text-n-slate-12 shrink-0"
-        :title="allCount"
-      >
-        {{ formattedAllCount }}
-      </span>
-      <span
-        v-if="!hasAppliedFiltersOrActiveFolders"
-        class="px-2 py-1 my-0.5 mx-1 rounded-md capitalize bg-n-slate-3 text-xxs text-n-slate-12 shrink-0"
-      >
-        {{ $t(`CHAT_LIST.CHAT_STATUS_FILTER_ITEMS.${activeStatus}.TEXT`) }}
-      </span>
+    <div class="flex min-w-0 flex-col items-start justify-center">
+      <div class="flex items-center gap-2 min-w-0">
+        <h1
+          class="text-base font-semibold truncate text-n-slate-12"
+          :title="pageTitle"
+        >
+          {{ pageTitle }}
+        </h1>
+        <span
+          v-if="
+            allCount > 0 && hasAppliedFiltersOrActiveFolders && !isListLoading
+          "
+          class="px-2 py-1 rounded-full capitalize bg-n-slate-3 text-xxs text-n-slate-12 shrink-0"
+          :title="allCount"
+        >
+          {{ formattedAllCount }}
+        </span>
+        <span
+          v-if="!hasAppliedFiltersOrActiveFolders"
+          class="px-2 py-1 rounded-full capitalize bg-[rgba(52,242,210,0.12)] text-xxs text-n-slate-12 shrink-0"
+        >
+          {{ $t(`CHAT_LIST.CHAT_STATUS_FILTER_ITEMS.${activeStatus}.TEXT`) }}
+        </span>
+      </div>
+      <div class="text-xs text-n-slate-10">
+        {{ queueSubtitle }}
+      </div>
     </div>
     <div class="flex items-center gap-1">
       <template v-if="hasAppliedFilters && !hasActiveFolders">

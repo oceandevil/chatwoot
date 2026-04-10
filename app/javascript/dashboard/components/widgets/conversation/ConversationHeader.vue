@@ -90,12 +90,13 @@ const hasMultipleInboxes = computed(
 );
 
 const hasSlaPolicyId = computed(() => props.chat?.sla_policy_id);
+const workspaceDeskLabel = computed(() => 'Waterwair desk');
 </script>
 
 <template>
   <div
     ref="conversationHeader"
-    class="flex flex-col gap-3 items-center justify-between flex-1 w-full min-w-0 xl:flex-row px-3 pt-3 pb-2 h-24 xl:h-12"
+    class="flex flex-col gap-3 items-center justify-between flex-1 w-full min-w-0 xl:flex-row px-4 pt-4 pb-3 h-28 xl:h-[4.5rem] border-b border-n-weak bg-[linear-gradient(180deg,rgba(52,242,210,0.08),rgba(255,255,255,0.02))]"
   >
     <div
       class="flex items-center justify-start w-full xl:w-auto max-w-full min-w-0 xl:flex-1"
@@ -135,6 +136,11 @@ const hasSlaPolicyId = computed(() => props.chat?.sla_policy_id);
           class="flex items-center gap-2 overflow-hidden text-xs conversation--header--actions text-ellipsis whitespace-nowrap"
         >
           <InboxName v-if="hasMultipleInboxes" :inbox="inbox" class="!mx-0" />
+          <span
+            class="rounded-full bg-[rgba(52,242,210,0.12)] px-2 py-1 text-[11px] font-medium uppercase tracking-[0.08em] text-n-slate-11"
+          >
+            {{ workspaceDeskLabel }}
+          </span>
           <span v-if="isSnoozed" class="font-medium text-n-amber-10">
             {{ snoozedDisplayText }}
           </span>

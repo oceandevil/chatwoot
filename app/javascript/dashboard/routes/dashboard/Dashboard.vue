@@ -130,7 +130,9 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-grow overflow-hidden text-n-slate-12">
+  <div
+    class="flex flex-grow overflow-hidden text-n-slate-12 bg-[radial-gradient(circle_at_top_left,_rgba(52,242,210,0.12),_transparent_28%),linear-gradient(180deg,_var(--color-n-surface-1),_var(--color-n-background))]"
+  >
     <NextSidebar
       :is-mobile-sidebar-open="isMobileSidebarOpen"
       @toggle-account-modal="toggleAccountModal"
@@ -141,7 +143,7 @@ export default {
     />
 
     <main
-      class="flex flex-1 h-full w-full min-h-0 px-0 overflow-hidden bg-n-surface-1"
+      class="flex flex-1 h-full w-full min-h-0 px-0 overflow-hidden bg-transparent"
     >
       <UpgradePage
         v-show="showUpgradePage"

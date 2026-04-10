@@ -6,6 +6,10 @@ class ConversationApi extends ApiClient {
     super('conversations', { accountScoped: true });
   }
 
+  get workspaceUrl() {
+    return `${this.baseUrl()}/workspace/conversations`;
+  }
+
   get({
     inboxId,
     status,
@@ -17,7 +21,7 @@ class ConversationApi extends ApiClient {
     sortBy,
     updatedWithin,
   }) {
-    return axios.get(this.url, {
+    return axios.get(this.workspaceUrl, {
       params: {
         inbox_id: inboxId,
         team_id: teamId,
@@ -30,6 +34,10 @@ class ConversationApi extends ApiClient {
         updated_within: updatedWithin,
       },
     });
+  }
+
+  show(id) {
+    return axios.get(`${this.workspaceUrl}/${id}`);
   }
 
   filter(payload) {
