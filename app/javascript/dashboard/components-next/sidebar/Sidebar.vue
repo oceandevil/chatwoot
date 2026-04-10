@@ -195,13 +195,14 @@ const onComposeClose = () => {
 
 const workspaceLabel = computed(() =>
   isACustomBrandedInstance.value
-    ? 'Client operations workspace'
-    : 'Omnichannel workspace'
+    ? 'Customer operations command center'
+    : 'Customer operations workspace'
 );
-const workspaceProductName = computed(() => 'Waterwair Inbox');
-const workspaceSectionTitle = computed(() => 'Workspace');
+const workspaceProductName = computed(() => 'Waterwair Chatagent');
+const workspaceSectionTitle = computed(() => 'Command Center');
 const workspaceSectionDescription = computed(
-  () => 'Routing, queue ownership, and handoff history in one place.'
+  () =>
+    'AI handoff, routing, ownership, and live customer operations in one desk.'
 );
 
 const newReportRoutes = () => [

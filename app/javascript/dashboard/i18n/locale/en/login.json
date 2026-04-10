@@ -12,7 +12,7 @@
     },
     "API": {
       "SUCCESS_MESSAGE": "Login successful",
-      "ERROR_MESSAGE": "Could not connect to Woot server. Please try again.",
+      "ERROR_MESSAGE": "Could not connect to the Waterwair workspace. Please try again.",
       "UNAUTH": "Username or password is incorrect. Please try again."
     },
     "OAUTH": {
@@ -21,7 +21,7 @@
       "NO_ACCOUNT_FOUND": "We couldn't find an account for your email address."
     },
     "FORGOT_PASSWORD": "Forgot your password?",
-    "CREATE_NEW_ACCOUNT": "Create a new account",
+    "CREATE_NEW_ACCOUNT": "Create a workspace account",
     "SUBMIT": "Login",
     "SAML": {
       "LABEL": "Login via SSO",

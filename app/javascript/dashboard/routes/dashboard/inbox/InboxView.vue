@@ -53,6 +53,38 @@ const totalNotificationCount = computed(() => {
   return meta.value.count;
 });
 
+const queueInsight = computed(() => {
+  const contactName = currentChat.value?.meta?.sender?.name;
+  if (contactName) {
+    return `Focused handoff lane for ${contactName}`;
+  }
+  return 'Focused handoff lane for escalations, follow-up, and revenue-critical conversations';
+});
+const workspaceBadgeLabel = 'Waterwair Chatagent';
+const workspaceHeading = 'Handoff queue';
+
+const queueChips = computed(() => {
+  const stats = [
+    {
+      label: 'Queue',
+      value: `${totalNotificationCount.value || 0} live`,
+    },
+    {
+      label: 'Status',
+      value: currentChat.value?.status || 'open',
+    },
+    {
+      label: 'Owner',
+      value:
+        currentChat.value?.meta?.assignee?.name ||
+        currentChat.value?.assignee?.name ||
+        'Unassigned',
+    },
+  ];
+
+  return stats;
+});
+
 const showEmptyState = computed(() => {
   return (
     !conversationId.value ||
@@ -195,6 +227,43 @@ onMounted(async () => {
       v-else
       class="flex flex-col w-full h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
     >
+      <div
+        class="mx-3 mt-3 rounded-2xl border border-[rgba(52,242,210,0.14)] bg-[radial-gradient(circle_at_top_left,rgba(52,242,210,0.16),transparent_32%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] px-4 py-4"
+      >
+        <div
+          class="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between"
+        >
+          <div class="min-w-0">
+            <div
+              class="mb-2 inline-flex rounded-full border border-[rgba(52,242,210,0.18)] bg-[rgba(52,242,210,0.08)] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-n-slate-11"
+            >
+              {{ workspaceBadgeLabel }}
+            </div>
+            <div class="text-lg font-semibold text-n-slate-12">
+              {{ workspaceHeading }}
+            </div>
+            <div class="mt-1 text-sm text-n-slate-10">
+              {{ queueInsight }}
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <div
+              v-for="chip in queueChips"
+              :key="chip.label"
+              class="min-w-[7rem] rounded-2xl border border-white/5 bg-black/10 px-3 py-2"
+            >
+              <div
+                class="text-[11px] uppercase tracking-[0.14em] text-n-slate-9"
+              >
+                {{ chip.label }}
+              </div>
+              <div class="mt-1 text-sm font-medium capitalize text-n-slate-12">
+                {{ chip.value }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <InboxItemHeader
         :total-length="totalNotificationCount"
         :current-index="activeNotificationIndex"
@@ -208,7 +277,7 @@ onMounted(async () => {
       >
         <Spinner class="text-n-brand" />
       </div>
-      <div v-else class="flex h-[calc(100%-48px)] min-w-0">
+      <div v-else class="flex h-[calc(100%-13rem)] min-w-0">
         <ConversationBox
           class="flex-1 [&.conversation-details-wrap]:!border-0"
           is-inbox-view

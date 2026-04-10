@@ -1,7 +1,7 @@
 {
   "REGISTER": {
-    "TRY_WOOT": "Create an account",
-    "GET_STARTED": "Get started with Waterwair",
+    "TRY_WOOT": "Create a workspace",
+    "GET_STARTED": "Get started with Waterwair Chatagent",
     "TITLE": "Register",
     "TESTIMONIAL_HEADER": "All it takes is one step to move forward",
     "TESTIMONIAL_CONTENT": "You're one step away from engaging your customers, retaining them and finding new ones.",
@@ -42,7 +42,7 @@
     },
     "API": {
       "SUCCESS_MESSAGE": "Registration Successful",
-      "ERROR_MESSAGE": "Could not connect to Woot server. Please try again."
+      "ERROR_MESSAGE": "Could not connect to the Waterwair workspace. Please try again."
     },
     "SUBMIT": "Create account",
     "HAVE_AN_ACCOUNT": "Already have an account?",

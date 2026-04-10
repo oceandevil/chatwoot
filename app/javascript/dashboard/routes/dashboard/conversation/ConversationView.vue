@@ -66,6 +66,8 @@ export default {
   data() {
     return {
       showSearchModal: false,
+      workspaceBadgeLabel: 'Waterwair Chatagent',
+      workspaceHeading: 'Customer operations workspace',
     };
   },
   computed: {
@@ -95,6 +97,29 @@ export default {
 
       const { is_contact_sidebar_open: isContactSidebarOpen } = this.uiSettings;
       return isContactSidebarOpen;
+    },
+    workspaceSummary() {
+      if (this.currentChat?.meta?.sender?.name) {
+        return `Live handoff thread for ${this.currentChat.meta.sender.name}`;
+      }
+
+      return 'Live handoff thread with routing, context, and customer history in one place.';
+    },
+    workspaceChips() {
+      return [
+        {
+          label: 'Status',
+          value: this.currentChat?.status || 'open',
+        },
+        {
+          label: 'Priority',
+          value: this.currentChat?.priority || 'normal',
+        },
+        {
+          label: 'Team',
+          value: this.currentChat?.meta?.team?.name || 'Frontline',
+        },
+      ];
     },
   },
   watch: {
@@ -196,36 +221,77 @@ export default {
 
 <template>
   <section class="flex w-full h-full min-w-0 gap-3 p-3 bg-transparent">
-    <div
-      class="min-w-0 h-full rounded-2xl border border-n-weak bg-n-solid-2/80 overflow-hidden backdrop-blur-sm"
-    >
-      <ChatList
-        :show-conversation-list="showConversationList"
-        :conversation-inbox="inboxId"
-        :label="label"
-        :team-id="teamId"
-        :conversation-type="conversationType"
-        :folders-id="foldersId"
-        :is-on-expanded-layout="isOnExpandedLayout"
-        @conversation-load="onConversationLoad"
-      />
-    </div>
-    <div
-      v-if="showMessageView"
-      class="flex flex-1 min-w-0 h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
-    >
-      <ConversationBox
-        :inbox-id="inboxId"
-        :is-on-expanded-layout="isOnExpandedLayout"
+    <div class="flex min-w-0 flex-1 flex-col gap-3">
+      <div
+        class="rounded-2xl border border-[rgba(52,242,210,0.14)] bg-[radial-gradient(circle_at_top_left,rgba(52,242,210,0.18),transparent_34%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] px-4 py-4"
       >
-        <SidepanelSwitch v-if="currentChat.id" />
-      </ConversationBox>
-    </div>
-    <div
-      v-if="shouldShowSidebar"
-      class="h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
-    >
-      <ConversationSidebar :current-chat="currentChat" />
+        <div
+          class="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between"
+        >
+          <div class="min-w-0">
+            <div
+              class="mb-2 inline-flex rounded-full border border-[rgba(52,242,210,0.18)] bg-[rgba(52,242,210,0.08)] px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-n-slate-11"
+            >
+              {{ workspaceBadgeLabel }}
+            </div>
+            <div class="text-lg font-semibold text-n-slate-12">
+              {{ workspaceHeading }}
+            </div>
+            <div class="mt-1 text-sm text-n-slate-10">
+              {{ workspaceSummary }}
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <div
+              v-for="chip in workspaceChips"
+              :key="chip.label"
+              class="min-w-[7rem] rounded-2xl border border-white/5 bg-black/10 px-3 py-2"
+            >
+              <div
+                class="text-[11px] uppercase tracking-[0.14em] text-n-slate-9"
+              >
+                {{ chip.label }}
+              </div>
+              <div class="mt-1 text-sm font-medium capitalize text-n-slate-12">
+                {{ chip.value }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex min-w-0 flex-1 gap-3">
+        <div
+          class="min-w-0 h-full rounded-2xl border border-n-weak bg-n-solid-2/80 overflow-hidden backdrop-blur-sm"
+        >
+          <ChatList
+            :show-conversation-list="showConversationList"
+            :conversation-inbox="inboxId"
+            :label="label"
+            :team-id="teamId"
+            :conversation-type="conversationType"
+            :folders-id="foldersId"
+            :is-on-expanded-layout="isOnExpandedLayout"
+            @conversation-load="onConversationLoad"
+          />
+        </div>
+        <div
+          v-if="showMessageView"
+          class="flex flex-1 min-w-0 h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
+        >
+          <ConversationBox
+            :inbox-id="inboxId"
+            :is-on-expanded-layout="isOnExpandedLayout"
+          >
+            <SidepanelSwitch v-if="currentChat.id" />
+          </ConversationBox>
+        </div>
+        <div
+          v-if="shouldShowSidebar"
+          class="h-full rounded-2xl border border-n-weak bg-n-solid-2/85 overflow-hidden backdrop-blur-sm"
+        >
+          <ConversationSidebar :current-chat="currentChat" />
+        </div>
+      </div>
     </div>
     <CmdBarConversationSnooze />
   </section>

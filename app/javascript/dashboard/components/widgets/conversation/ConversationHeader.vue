@@ -90,7 +90,7 @@ const hasMultipleInboxes = computed(
 );
 
 const hasSlaPolicyId = computed(() => props.chat?.sla_policy_id);
-const workspaceDeskLabel = computed(() => 'Waterwair desk');
+const workspaceDeskLabel = computed(() => 'Waterwair live desk');
 </script>
 
 <template>

@@ -39,7 +39,8 @@ const hasAppliedFiltersOrActiveFolders = computed(() => {
 const allCount = computed(() => props.conversationStats?.allCount || 0);
 const formattedAllCount = computed(() => formatNumber(allCount.value));
 const queueSubtitle = computed(
-  () => 'Prioritized handoff queue for live support and follow-up.'
+  () =>
+    'Priority queue for AI escalations, VIP follow-up, and live support coverage.'
 );
 
 const toggleConversationLayout = () => {
